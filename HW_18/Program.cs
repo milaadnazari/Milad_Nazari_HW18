@@ -1,7 +1,10 @@
+using HW_18.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IGetStores, GetStores>();
 
 var app = builder.Build();
 

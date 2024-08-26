@@ -1,0 +1,32 @@
+﻿@model List<HW_18.Models.Product>;
+<div class="card">
+    <div class="card-body">
+
+        <span>sort price: </span>
+        <a class="btn btn-primary mb-2">Low to high</a>
+        <a class="btn btn-primary mb-2">High to low</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Model year</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <th scope="row">@product.product_name</th>
+                        <th scope="row">@product.model_year</th>
+                        <th scope="row">@product.list_price</th>
+                        <th>
+                            <a class="btn btn-warning mb-2" asp-action="Products" asp-route-id="@product.product_id">Edit</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

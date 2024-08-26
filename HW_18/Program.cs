@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IGetStores, GetStores>();
+builder.Services.AddScoped<IGetProducts, GetProduct>();
 
 var app = builder.Build();
 

@@ -16,20 +16,22 @@ namespace HW_18.Services
         }
         public async Task<List<Store>> Execute(string zip, string name)
         {
-            var cS = new SqlConnection(_cS);
-            cS.Open();
-            string sql = @"SELECT * FROM [BikeStores].[sales].[stores]";
-            var result = await cS.QueryAsync<Store>(sql);
-            var resultList = result.ToList();
-            if (!string.IsNullOrEmpty(name)) 
+            using (var cS = new SqlConnection(_cS))
             {
-                resultList = resultList.Where(a => a.store_name.ToLower().Contains(name.ToLower())).ToList();
+                cS.Open();
+                string sql = @"SELECT * FROM [BikeStores].[sales].[stores]";
+                var result = await cS.QueryAsync<Store>(sql);
+                var resultList = result.ToList();
+                if (!string.IsNullOrEmpty(name))
+                {
+                    resultList = resultList.Where(a => a.store_name.ToLower().Contains(name.ToLower())).ToList();
+                }
+                if (!string.IsNullOrEmpty(zip))
+                {
+                    resultList = resultList.Where(a => a.zip_code.Contains(zip)).ToList();
+                }
+                return resultList;
             }
-            if (!string.IsNullOrEmpty(zip))
-            {
-                resultList = resultList.Where(a => a.zip_code.Contains(zip)).ToList();
-            }
-            return resultList;
         }
     }
 }

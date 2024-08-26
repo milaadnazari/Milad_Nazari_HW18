@@ -36,7 +36,7 @@
                         <th scope="row">@store.state</th>
                         <th scope="row">@store.zip_code</th>
                         <th>
-                            <Button id="@store.store_id" class="btn btn-info mb-2">Details</Button>
+                            <a class="btn btn-info mb-2" asp-action="Products" asp-route-id="@store.store_id">Details</a>
                         </th>
                     </tr>
                 }

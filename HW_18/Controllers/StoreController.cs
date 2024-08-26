@@ -10,10 +10,10 @@ namespace HW_18.Controllers
         {
             _iGetStores = iGetStores;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string zip, string name)
         {
-            var res = await _iGetStores.Execute();
-            return Json(res);
+            var res = await _iGetStores.Execute(zip, name);
+            return View(res);
         }
     }
 }

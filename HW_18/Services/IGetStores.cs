@@ -4,6 +4,6 @@ namespace HW_18.Services
 {
     public interface IGetStores
     {
-        Task<List<Store>> Execute();
+        Task<List<Store>> Execute(string zip, string name);
     }
 }

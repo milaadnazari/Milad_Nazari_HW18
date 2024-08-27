@@ -1,20 +1,22 @@
 ﻿using Dapper;
 using HW_18.Models;
 using System.Data.SqlClient;
+using System.Xml.Linq;
 
 namespace HW_18.Services
 {
-    public class GetProduct : IGetProduct
+    public class GetStoreProducts : IGetStoreProducts
     {
         private readonly IConfiguration _iConfiguration;
         private string _connectionString;
-        public GetProduct(IConfiguration iConfiguration)
+        public GetStoreProducts(IConfiguration iConfiguration)
         {
             _iConfiguration = iConfiguration;
             _connectionString = _iConfiguration.GetConnectionString("DefaultConnection");
         }
-        public async Task<List<Product>> Execute(int id)
+        public async Task<List<Product>> Execute(int StoreId, bool isAsc)
         {
+            string sortString = isAsc ? "" : "DESC";
             using (var cS = new SqlConnection(_connectionString))
             {
                 cS.Open();
@@ -26,10 +28,11 @@ namespace HW_18.Services
       ,[model_year]
       ,[list_price]
   FROM [BikeStores].[production].[products]
-  WHERE product_id = @id";
-                var result = await cS.QueryAsync<Product>(sql, new {id = id});
+  WHERE product_id IN (SELECT product_id FROM [BikeStores].[production].[stocks] WHERE store_id = {StoreId})
+  ORDER BY [list_price] {sortString}";
+                var result = await cS.QueryAsync<Product>(sql);
                 var resultList = result.ToList();
-
+                
                 return resultList;
             }
         }

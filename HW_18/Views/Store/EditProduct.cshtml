@@ -1,0 +1,41 @@
+﻿@model HW_18.Models.Product;
+<div class="card">
+    <form class="form-group" method="post">
+        <div class="form-group">
+            <input asp-for="@Model.product_id" type="text" class="form-control m-3" name="product_id" hidden>
+            <label for="Name" class="col-sm-2 control-label m-1">Name</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.product_name" type="text" class="form-control m-3" name="product_name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="brand_id" class="col-sm-2 control-label m-1">brand_id</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.brand_id" type="text" class="form-control m-3" name="brand_id">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="category_id" class="col-sm-2 control-label m-1">category_id</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.category_id" type="text" class="form-control m-3" name="category_id">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="model_year" class="col-sm-2 control-label m-1">model_year</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.model_year" type="text" class="form-control m-3" name="model_year">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="list_price" class="col-sm-2 control-label m-1">list_price</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.list_price" type="text" class="form-control m-3" name="list_price">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-outline-primary m-3" asp-action="EditProduct">Accept</button>
+            </div>
+        </div>
+    </form>
+</div>

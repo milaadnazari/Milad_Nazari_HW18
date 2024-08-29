@@ -36,7 +36,8 @@ namespace HW_18.Controllers
         public async Task<IActionResult> EditProduct([FromForm] Product product)
         {
             var res = await _updateProduct.Execute(product);
-            return RedirectToAction("Products", new {id = 1});
+            TempData["result"] = res;
+            return RedirectToAction("EditProduct", new {id = product.product_id});
         }
 
     }

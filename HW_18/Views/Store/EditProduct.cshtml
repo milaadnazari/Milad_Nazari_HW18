@@ -1,6 +1,17 @@
 ﻿@model HW_18.Models.Product;
 <div class="card">
     <form class="form-group" method="post">
+        @{
+            if (@TempData["result"] != null)
+            {
+                var x = @TempData["result"].ToString();
+                bool isSucess = (x == "Success");
+                string alertClass = isSucess ? "alert-success" : "alert-danger";
+                <div class="alert @alertClass role="alert">
+                    @TempData["result"]
+                </div>
+            }
+        }
         <div class="form-group">
             <input asp-for="@Model.product_id" type="text" class="form-control m-3" name="product_id" hidden>
             <label for="Name" class="col-sm-2 control-label m-1">Name</label>

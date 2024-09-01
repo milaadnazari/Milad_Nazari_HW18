@@ -1,21 +1,20 @@
 ﻿using Dapper;
 using HW_18.Models;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace HW_18.Services
 {
     public class GetProduct : IGetProduct
     {
-        private readonly IConfiguration _iConfiguration;
-        private string _connectionString;
+        private readonly IDbConnection _connectionString;
         public GetProduct(IConfiguration iConfiguration)
         {
-            _iConfiguration = iConfiguration;
-            _connectionString = _iConfiguration.GetConnectionString("DefaultConnection");
+            _connectionString = new SqlConnection(iConfiguration.GetConnectionString("DefaultConnection"));
         }
         public async Task<List<Product>> Execute(int id)
         {
-            using (var cS = new SqlConnection(_connectionString))
+            using (var cS = _connectionString)
             {
                 cS.Open();
                 string sql = $@"SELECT  

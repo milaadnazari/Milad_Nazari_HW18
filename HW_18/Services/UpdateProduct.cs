@@ -9,11 +9,9 @@ namespace HW_18.Services
 {
     public class UpdateProduct : IUpdateProduct
     {
-        private readonly IConfiguration _configuration;
         private readonly IDbConnection _connection;
         public UpdateProduct(IConfiguration configuration)
         {
-            _configuration = configuration;
             _connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
         }
         public async Task<string> Execute(Product product)

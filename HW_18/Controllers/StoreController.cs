@@ -22,9 +22,9 @@ namespace HW_18.Controllers
             var res = await _iGetStores.Execute(zip, name);
             return View(res);
         }
-        public async Task<IActionResult> Products(int id, bool isAsc = true)
+        public async Task<IActionResult> Products(int id, bool isAsc = true, int page = 1)
         {
-            var res = await _iGetProducts.Execute(id, isAsc);
+            var res = await _iGetProducts.Execute(id, isAsc, page);
             return View(res);
         }
         public async Task<IActionResult> EditProduct(int id)

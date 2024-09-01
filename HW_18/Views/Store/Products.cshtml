@@ -1,21 +1,29 @@
-﻿@model List<HW_18.Models.Product>;
+﻿@model HW_18.ViewModels.ProductViewModel;
+@{
+    int nextPage = Model.PageNumber + 1;
+    int priviousPage = Model.PageNumber - 1;
+}
 <div class="card">
     <div class="card-body">
 
-        <span>sort price: </span>
-        <a class="btn btn-primary mb-2" asp-action="Products" asp-route-isAsc="true">Low to high</a>
-        <a class="btn btn-primary mb-2" asp-route-isAsc="false">High to low</a>
+        <a class="btn btn-outline-primary mb-2" asp-route-isAsc="@Model.IsAsc" asp-route-page="@priviousPage">Previous page</a>
+        <span class="text-xxl-center"> Page @Model.PageNumber </span>
+        <a class="btn btn-outline-primary mb-2" asp-route-isAsc="@Model.IsAsc" asp-route-page="@nextPage">Next page</a>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">Product</th>
                     <th scope="col">Model year</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">
+                        <a class="btn-primary mb-0" asp-route-isAsc="true" asp-route-page="@Model.PageNumber">&#x25B2;</a>
+                        Price
+                        <a class="btn-primary mb-0" asp-route-isAsc="false" asp-route-page="@Model.PageNumber">&#x25BC;</a>
+                    </th>
                     <th scope="col">Operation</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var product in Model)
+                @foreach (var product in Model.products)
                 {
                     <tr>
                         <th scope="row">@product.product_name</th>
@@ -28,5 +36,8 @@
                 }
             </tbody>
         </table>
+        <a class="btn btn-outline-primary mb-2" asp-route-isAsc="@Model.IsAsc" asp-route-page="@priviousPage">Previous page</a>
+        <span class="text-xxl-center"> Page @Model.PageNumber </span>
+        <a class="btn btn-outline-primary mb-2" asp-route-isAsc="@Model.IsAsc" asp-route-page="@nextPage">Next page</a>
     </div>
 </div>
